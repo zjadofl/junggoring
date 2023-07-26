@@ -8,3 +8,4 @@
 <link rel="stylesheet" href="resources/css/roomSelectOne.css">
 <link rel="stylesheet" href="resources/css/top.css">
 <link rel="stylesheet" href="resources/css/all.css">
+<link rel="stylesheet" href="resources/css/base.css">

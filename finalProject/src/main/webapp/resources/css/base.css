@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+a, a:hover {
+	text-decoration: none;
+	color: black;
+}
+
+.text-main-color {
+	color: #33A1FD;
+}
+

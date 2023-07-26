@@ -1,18 +1,12 @@
-@charset "UTF-8";
 
-a, a:hover {
-	text-decoration: none;
-	color: black;
-}
-
-/* ë§ˆì´í˜ì´ì§€ breadcrumb */
+/* ¸¶ÀÌÆäÀÌÁö breadcrumb */
 .breadcrumb {
 	padding-top: 35px;
 	padding-bottom: 35px;
 }
 
-/* ë§ˆì´í˜ì´ì§€ ì„œë¸Œë©”ë‰´ */
-.mypage-floating-menu { /* ë§ˆì´í˜ì´ì§€ í†µì¼ì‹œí‚¤ê¸° */
+/* ¸¶ÀÌÆäÀÌÁö ¼­ºê¸Ş´º */
+.mypage-floating-menu { /* ¸¶ÀÌÆäÀÌÁö ÅëÀÏ½ÃÅ°±â */
 	padding-top: 15px;
 	padding-bottom: 15px;
 	border: 2px solid #33A1FD;

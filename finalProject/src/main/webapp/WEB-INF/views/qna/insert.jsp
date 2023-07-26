@@ -96,7 +96,7 @@
 <body>
 <jsp:include page="../top_menu.jsp"></jsp:include>
 
-	<div class="container">
+	<div class="container-fluid">
 		<div class="breadcrumb fs-5 fw-bold px-4">내 Q&A 목록</div>
  		<div class="row my-3">
      	<div class="col-md-3 col-lg-2">     
