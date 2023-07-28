@@ -12,100 +12,44 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <link href="resources/css/base.css" rel="stylesheet">
 <link href="resources/css/home.css" rel="stylesheet">
-<script>
-
-
-</script>
-
-<style type="text/css">
-.selling-items-status {
-	border-radius: 3px;
-	color: white;
-	padding: 2px 7px;
-}
-
-.background-color-main {
-	background-color: #33A1FD; 
-}
-
-.background-color-silver {
-	background-color: silver; 
-}
-
-/* .selling-item {
-	width: 20%;
-} */
-
-.item-image {
-	width: 100%;
-	height: 150px;
-	overflow: hidden;
-	margin: 0 auto;
-	border-radius: 5%;
-	text-align: center;
-}
-
-.item-image img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
-.item-content {
-	padding-top: 15px;
-	padding-bottom: 15px;
-	max-width: 259px; /* 제목 컨테이너의 최대 너비 지정 */
-	white-space: nowrap; /* 텍스트가 너비를 벗어나도 줄바꿈하지 않음 */
-	overflow: hidden; /* 너비를 벗어난 텍스트는 감춤 */
-	text-overflow: ellipsis; /* 너비를 벗어난 텍스트에 말 줄임표(...) 추가 */
-}
-
-.no-list {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-}
-
-</style>
 </head>
 <body>
 	<jsp:include page="top_menu.jsp"></jsp:include>
 	<div class="container">
 		<div class="row mx-2 my-5">
 			<div class="col-6 px-0">
-		    	<h4 class="fw-bold">공지사항</h4>
-		  	</div>
-		  	<div class="col-6 text-end px-0">
-		    	<a href="noticeSelectAll.do" class="fw-bold fs-5">더보기</a>
-		 	</div>
+				<h4 class="fw-bold">공지사항</h4>
+			</div>
+			<div class="col-6 text-end px-0">
+				<a href="noticeSelectAll.do" class="fw-bold fs-5">더보기</a>
+			</div>
 			<table class="table mt-3" id="ntable">
 				<thead>
 					<tr>
-			            <th scope="col" class="col-7">제목</th>
-			            <th scope="col" class="col-2">작성자</th>
-			            <th scope="col" class="col-3">작성일</th>
+						<th scope="col" class="col-7">제목</th>
+						<th scope="col" class="col-2">작성자</th>
+						<th scope="col" class="col-3">작성일</th>
 					</tr>
 				</thead>
 				<tbody class="table-group-divider" id="vos">
 					<c:forEach var="vo" items="${nvos}">
 						<tr onClick="location.href='noticeSelectOne.do?notice_num=${vo.notice_num}'">
-							<td class="col-7">${vo.notice_title}</td>
-							<td class="col-2">관리자</td>
-							<td class="col-3"><fmt:formatDate value="${vo.notice_date}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+							<td>${vo.notice_title}</td>
+							<td>관리자</td>
+							<td><fmt:formatDate value="${vo.notice_date}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
-		
+
 		<div class="row mx-2 my-5">
 			<div class="col-6 px-0">
-		    	<h4 class="fw-bold">최근 중고거래</h4>
-		  	</div>
-		  	<div class="col-6 text-end px-0">
-		    	<a href="boardSelectAll.do" class="fw-bold fs-5">더보기</a>
-		 	</div>
+				<h4 class="fw-bold">최근 중고거래</h4>
+			</div>
+			<div class="col-6 text-end px-0">
+				<a href="boardSelectAll.do" class="fw-bold fs-5">더보기</a>
+			</div>
 			<c:choose>
 				<c:when test="${empty vos}">
 					<div class="no-list mt-3">
@@ -120,38 +64,43 @@
 							<c:forEach var="vo" items="${vos}">
 								<c:if test="${vo.board_status != 3}">
 									<!-- 상품각각 -->
-									<div class="item-container col-lg-3 col-md-4 col-sm-6 col-6" onClick="location.href='boardSelectOne.do?board_num=${vo.board_num}'">
+									<div class="item-container col-lg-3 col-md-3 col-sm-6 col-6" onClick="location.href='boardSelectOne.do?board_num=${vo.board_num}'">
 										<div class="item-image">
-											<img src="resources/img/${vo.board_savename1}" alt=""/>
+											<img src="resources/img/${vo.board_savename1}" alt="" />
 										</div>
 										<div class="item-content">
-											<c:choose>
-												<c:when test="${vo.board_type eq 2}">
-													<c:choose>
-														<c:when test="${vo.board_status eq 1}">
-															<span class="selling-items-status background-color-main">판매중</span>
-														</c:when>
-														<c:when test="${vo.board_status eq 2}">
-															<span class="selling-items-status background-color-silver">판매완료</span>
-														</c:when>
-													</c:choose>
-												</c:when>
-												<c:when test="${vo.board_type eq 1}">
-													<c:choose>
-														<c:when test="${vo.board_status eq 1}">
-															<span class="selling-items-status background-color-main">구매중</span>
-														</c:when>
-														<c:when test="${vo.board_status eq 2}">
-															<span class="selling-items-status background-color-silver">구매완료</span>
-														</c:when>
-													</c:choose>
-												</c:when>
-											</c:choose>
-											<span>${vo.board_title}</span><br />
-											<span><fmt:formatNumber value="${vo.price}" pattern="#,###"/>원</span><br/> 
-											<span>${vo.deal_region}</span><br/>
-											<span><img width="25px" src="resources/img/view_count.png" alt=""/></span>
-											<span>${vo.view_count}</span> <span>♡ ${vo.likecount}</span>
+											<div class="item-title text-ellipsis">
+												<c:choose>
+													<c:when test="${vo.board_type eq 2}">
+														<c:choose>
+															<c:when test="${vo.board_status eq 1}">
+																<span class="item-status background-main-color">판매중</span>
+															</c:when>
+															<c:when test="${vo.board_status eq 2}">
+																<span class="item-status background-color-silver">판매완료</span>
+															</c:when>
+														</c:choose>
+													</c:when>
+													<c:when test="${vo.board_type eq 1}">
+														<c:choose>
+															<c:when test="${vo.board_status eq 1}">
+																<span class="item-status background-main-color">구매중</span>
+															</c:when>
+															<c:when test="${vo.board_status eq 2}">
+																<span class="item-status background-color-silver">구매완료</span>
+															</c:when>
+														</c:choose>
+													</c:when>
+												</c:choose>
+												<span>${vo.board_title}</span>
+											</div>
+											<div class="item-price">
+												<fmt:formatNumber value="${vo.price}" pattern="#,###원" />
+											</div>
+											<div class="item-region">${vo.deal_region}</div>
+											<div class="item-view-like">
+												<img width="25px" src="resources/img/views.png" alt="조회수 아이콘" /> <span class="view-count">${vo.view_count}</span> <img width="18px" src="resources/img/border-like.png" alt="조회수 아이콘" /> <span class="like-count">${vo.likecount}</span>
+											</div>
 										</div>
 									</div>
 								</c:if>
@@ -164,11 +113,11 @@
 
 		<div class="row mx-2 my-5">
 			<div class="col-6 px-0">
-		    	<h4 class="fw-bold">최근 팔아요</h4>
-		  	</div>
-		  	<div class="col-6 text-end px-0">
-		    	<a href="boardSelectAll.do" class="fw-bold fs-5">더보기</a>
-		 	</div>
+				<h4 class="fw-bold">최근 팔아요</h4>
+			</div>
+			<div class="col-6 text-end px-0">
+				<a href="boardSelectAll.do" class="fw-bold fs-5">더보기</a>
+			</div>
 			<c:choose>
 				<c:when test="${empty vos}">
 					<div class="no-list mt-3">
@@ -183,39 +132,43 @@
 							<c:forEach var="vo" items="${sellvos}">
 								<c:if test="${vo.board_status != 3}">
 									<!-- 상품각각 -->
-									<div class="item-container col-lg-3 col-md-4 col-sm-6 col-6" onClick="location.href='boardSelectOne.do?board_num=${vo.board_num}'">
+									<div class="item-container col-lg-3 col-md-3 col-sm-6 col-6" onClick="location.href='boardSelectOne.do?board_num=${vo.board_num}'">
 										<div class="item-image">
 											<img src="resources/img/${vo.board_savename1}" alt="" />
 										</div>
 										<div class="item-content">
-											<c:choose>
-												<c:when test="${vo.board_type eq 2}">
-													<c:choose>
-														<c:when test="${vo.board_status eq 1}">
-															<span class="selling-items-status background-color-main">판매중</span>
-														</c:when>
-														<c:when test="${vo.board_status eq 2}">
-															<span class="selling-items-status background-color-silver">판매완료</span>
-														</c:when>
-													</c:choose>
-												</c:when>
-												<c:when test="${vo.board_type eq 1}">
-													<c:choose>
-														<c:when test="${vo.board_status eq 1}">
-															<span class="selling-items-status background-color-main">구매중</span>
-														</c:when>
-														<c:when test="${vo.board_status eq 2}">
-															<span class="selling-items-status background-color-silver">구매완료</span>
-														</c:when>
-													</c:choose>
-												</c:when>
-											</c:choose>
-											<span>${vo.board_title}</span><br />
-											<span><fmt:formatNumber value="${vo.price}" pattern="#,###" />원</span><br />
-											<span>${vo.deal_region}</span><br /> 
-											<span><img width="25px" src="resources/img/view_count.png" alt="" /></span>
-											<span>${vo.view_count}</span> 
-											<span>♡ ${vo.likecount}</span>
+											<div class="item-title text-ellipsis">
+												<c:choose>
+													<c:when test="${vo.board_type eq 2}">
+														<c:choose>
+															<c:when test="${vo.board_status eq 1}">
+																<span class="item-status background-main-color">판매중</span>
+															</c:when>
+															<c:when test="${vo.board_status eq 2}">
+																<span class="item-status background-color-silver">판매완료</span>
+															</c:when>
+														</c:choose>
+													</c:when>
+													<c:when test="${vo.board_type eq 1}">
+														<c:choose>
+															<c:when test="${vo.board_status eq 1}">
+																<span class="item-status background-main-color">구매중</span>
+															</c:when>
+															<c:when test="${vo.board_status eq 2}">
+																<span class="item-status background-color-silver">구매완료</span>
+															</c:when>
+														</c:choose>
+													</c:when>
+												</c:choose>
+												<span>${vo.board_title}</span>
+											</div>
+											<div class="item-price">
+												<fmt:formatNumber value="${vo.price}" pattern="#,###원" />
+											</div>
+											<div class="item-region">${vo.deal_region}</div>
+											<div class="item-view-like">
+												<img width="25px" src="resources/img/views.png" alt="조회수 아이콘" /> <span class="view-count">${vo.view_count}</span> <img width="18px" src="resources/img/border-like.png" alt="조회수 아이콘" /> <span class="like-count">${vo.likecount}</span>
+											</div>
 										</div>
 									</div>
 								</c:if>
@@ -228,11 +181,11 @@
 
 		<div class="row mx-2 my-5">
 			<div class="col-6 px-0">
-		    	<h4 class="fw-bold">최근 구해요</h4>
-		  	</div>
-		  	<div class="col-6 text-end px-0">
-		    	<a href="boardSelectAll.do" class="fw-bold fs-5">더보기</a>
-		 	</div>
+				<h4 class="fw-bold">최근 구해요</h4>
+			</div>
+			<div class="col-6 text-end px-0">
+				<a href="boardSelectAll.do" class="fw-bold fs-5">더보기</a>
+			</div>
 			<c:choose>
 				<c:when test="${empty vos}">
 					<div class="no-list mt-3">
@@ -247,34 +200,43 @@
 							<c:forEach var="vo" items="${buyvos}">
 								<c:if test="${vo.board_status != 3}">
 									<!-- 상품각각 -->
-									<div class="item-container col-lg-3 col-md-4 col-sm-6 col-6" onClick="location.href='boardSelectOne.do?board_num=${vo.board_num}'">
+									<div class="item-container col-lg-3 col-md-3 col-sm-6 col-6" onClick="location.href='boardSelectOne.do?board_num=${vo.board_num}'">
 										<div class="item-image">
 											<img src="resources/img/${vo.board_savename1}" alt="" />
 										</div>
 										<div class="item-content">
-											<c:choose>
-												<c:when test="${vo.board_type eq 2}">
-													<c:choose>
-														<c:when test="${vo.board_status eq 1}">
-															<span class="selling-items-status background-color-main">판매중</span>
-														</c:when>
-														<c:when test="${vo.board_status eq 2}">
-															<span class="selling-items-status background-color-silver">판매완료</span>
-														</c:when>
-													</c:choose>
-												</c:when>
-												<c:when test="${vo.board_type eq 1}">
-													<c:choose>
-														<c:when test="${vo.board_status eq 1}">
-															<span class="selling-items-status background-color-main">구매중</span>
-														</c:when>
-														<c:when test="${vo.board_status eq 2}">
-															<span class="selling-items-status background-color-silver">구매완료</span>
-														</c:when>
-													</c:choose>
-												</c:when>
-											</c:choose>
-											<span>${vo.board_title}</span><br /> <span><fmt:formatNumber value="${vo.price}" pattern="#,###" />원</span><br /> <span>${vo.deal_region}</span><br /> <span><img width="25px" src="resources/img/view_count.png" alt="" /></span><span>${vo.view_count}</span> <span>♡ ${vo.likecount}</span>
+											<div class="item-title text-ellipsis">
+												<c:choose>
+													<c:when test="${vo.board_type eq 2}">
+														<c:choose>
+															<c:when test="${vo.board_status eq 1}">
+																<span class="item-status background-main-color">판매중</span>
+															</c:when>
+															<c:when test="${vo.board_status eq 2}">
+																<span class="item-status background-color-silver">판매완료</span>
+															</c:when>
+														</c:choose>
+													</c:when>
+													<c:when test="${vo.board_type eq 1}">
+														<c:choose>
+															<c:when test="${vo.board_status eq 1}">
+																<span class="item-status background-main-color">구매중</span>
+															</c:when>
+															<c:when test="${vo.board_status eq 2}">
+																<span class="item-status background-color-silver">구매완료</span>
+															</c:when>
+														</c:choose>
+													</c:when>
+												</c:choose>
+												<span>${vo.board_title}</span>
+											</div>
+											<div class="item-price">
+												<fmt:formatNumber value="${vo.price}" pattern="#,###원"/>
+											</div>
+											<div class="item-region">${vo.deal_region}</div>
+											<div class="item-view-like">
+												<img width="25px" src="resources/img/views.png" alt="조회수 아이콘" /> <span class="view-count">${vo.view_count}</span> <img width="18px" src="resources/img/border-like.png" alt="조회수 아이콘" /> <span class="like-count">${vo.likecount}</span>
+											</div>
 										</div>
 									</div>
 								</c:if>
@@ -286,5 +248,4 @@
 		</div>
 	</div>
 </body>
-
 </html>

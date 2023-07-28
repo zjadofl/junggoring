@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 @font-face {
-    font-family: "Pretendard-Regular";
+    font-family: 'Pretendard-Regular';
     src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
     font-weight: 400;
     font-style: normal;
@@ -20,3 +20,16 @@ a, a:hover {
 	color: #33A1FD;
 }
 
+.background-main-color {
+	background-color: #33A1FD;
+}
+
+.background-color-silver {
+	background-color: silver;
+}
+
+.text-ellipsis {
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
