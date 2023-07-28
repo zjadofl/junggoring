@@ -9,7 +9,7 @@
 	        </a>
 	
 	        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-	          <li><a href="home.do" class="nav-link px-2 link-secondary"><img src="resources/img/logo1-sample.png" width=100px/></a></li>
+	          <li><a href="home.do" class="nav-link px-2 link-secondary"><img src="resources/img/logo.png" width=100px/></a></li>
 	          <li><a href="noticeSelectAll.do" class="nav-link px-2 link-dark">공지사항</a></li>
 	          <li><a href="boardSelectAll.do" class="nav-link px-2 link-dark">중고거래</a></li>
 	          <li><a href="roomSelectAll.do" class="nav-link px-2 link-dark">채팅목록</a></li>
