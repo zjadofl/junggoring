@@ -231,7 +231,7 @@
 												<span>${vo.board_title}</span>
 											</div>
 											<div class="item-price">
-												<fmt:formatNumber value="${vo.price}" pattern="#,###원"/>
+												<fmt:formatNumber value="${vo.price}" pattern="#,###원" />
 											</div>
 											<div class="item-region">${vo.deal_region}</div>
 											<div class="item-view-like">
