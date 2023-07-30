@@ -37,15 +37,15 @@ html, body {
   height: 100%;
 }
 
-.form-control:focus {
-	border: 1px solid #33A1FD;
-	box-shadow: none;
-} 
-
 #logo {
 	font-family: "Happiness-Sans-Title", sans-serif;
 	font-size: 25px;
 }
+
+.form-control:focus {
+	border: 1px solid #33A1FD;
+	box-shadow: none;
+} 
 
 .nav-link {
 	font-weight: 500;
