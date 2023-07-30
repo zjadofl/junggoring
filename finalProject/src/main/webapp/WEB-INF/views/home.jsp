@@ -240,7 +240,7 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
-		<jsp:include page="footer.jsp"></jsp:include>
 	</div>
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

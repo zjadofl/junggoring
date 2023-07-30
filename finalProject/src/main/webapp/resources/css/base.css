@@ -33,6 +33,15 @@ a, a:hover {
 	color: black;
 }
 
+html, body {
+  height: 100%;
+}
+
+.form-control:focus {
+	border: 1px solid #33A1FD;
+	box-shadow: none;
+} 
+
 #logo {
 	font-family: "Happiness-Sans-Title", sans-serif;
 	font-size: 25px;

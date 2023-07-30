@@ -1,4 +1,16 @@
 @charset "UTF-8";
+
+.button-main-color {
+	background-color: #33A1FD;
+	color: white;
+}
+
+.button-main-color:hover {
+	background-color: #33A1FD;
+	color: white;
+	opacity: 0.8;
+}
+
 .myButton {
 	background-color:#ffffff;
 	border-radius:6px;
