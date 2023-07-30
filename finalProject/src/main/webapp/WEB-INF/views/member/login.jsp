@@ -22,8 +22,8 @@
 					<div>
 						<input type="text" id="id" name="id" class="form-control" placeholder="아이디" required>
 						<input type="password" id="pw" name="pw" class="form-control mt-2" placeholder="비밀번호" required>
-						<p>${message}</p>
-						<input type="submit" value="로그인" class="btn button-main-color w-100">
+						<input type="submit" value="로그인" class="btn button-main-color w-100 mt-2">
+						<p class="mt-2">${message}</p>
 					</div>
 				</form>
 			</div>
