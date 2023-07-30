@@ -68,8 +68,17 @@ a, a:hover {
 	background-color: silver;
 }
 
+.table {
+	table-layout: fixed;
+}
+
 .text-ellipsis {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+
+.pagenation a {
+	padding-left: 4px;
+	padding-right: 4px;
 }

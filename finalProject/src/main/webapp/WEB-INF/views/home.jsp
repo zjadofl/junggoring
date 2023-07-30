@@ -1,9 +1,10 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>중고링</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -24,19 +25,12 @@
 				<a href="noticeSelectAll.do" class="fw-bold fs-5">더보기</a>
 			</div>
 			<table class="table mt-3" id="ntable">
-				<thead>
-					<tr>
-						<th scope="col" class="col-7">제목</th>
-						<th scope="col" class="col-2">작성자</th>
-						<th scope="col" class="col-3">작성일</th>
-					</tr>
-				</thead>
 				<tbody class="table-group-divider" id="vos">
 					<c:forEach var="vo" items="${nvos}">
 						<tr onClick="location.href='noticeSelectOne.do?notice_num=${vo.notice_num}'">
-							<td>${vo.notice_title}</td>
-							<td>관리자</td>
-							<td><fmt:formatDate value="${vo.notice_date}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+							<td class="col-lg-9 col-md-8 col-6 text-ellipsis">${vo.notice_title}</td>
+							<td class="col-lg-1 col-md-2 col-2 text-end">관리자</td>
+							<td class="col-lg-2 col-md-2 col-4 text-end"><fmt:formatDate value="${vo.notice_date}" pattern="yyyy-MM-dd" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>

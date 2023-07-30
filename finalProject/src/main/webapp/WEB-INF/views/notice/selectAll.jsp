@@ -1,61 +1,56 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-  	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 <title>공지사항</title>
-<jsp:include page="../css.jsp"></jsp:include>
+<link href="resources/css/base.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="../top_menu.jsp"></jsp:include>
-	<h1>공지사항</h1>
+	<div class="container">
+		<div class="row mx-2 my-5">
+			<div class="col-6 px-0">
+				<h4 class="fw-bold">공지사항</h4>
+			</div>
+		
+			<div>
+				<form action="noticeSearchList.do">
+					<select name="searchKey" id="searchKey" class="form-select">
+						<option value="notice_title">제목</option>
+						<option value="notice_content">내용</option>
+					</select> 
+					<input type="text" name="searchWord" id="searchWord" class="form-control" placeholder="키워드를 입력하세요.">
+					<input type="submit" value="검색">
+				</form>
+			</div>
 	
-	<div style="float:right;">
-		<form action="noticeSearchList.do">
-			<select name="searchKey" id=searchKey">
-				<option value="notice_title">제목</option>
-				<option value="notice_content">내용</option>
-			</select>
-			<input type="text" name="searchWord" id="searchWord" placeholder="키워드를 입력하세요.">
-			<input type="submit" value="검색">
-		</form>
-	</div>
-	
-	<table id="noticeList">
-	<thead>
-		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>내용</th>
-			<th>날짜</th>
-		</tr>
-	</thead>
-	<tbody>
-		<c:forEach var="vo" items="${vos}">
-			<tr>
-				<td><a href="noticeSelectOne.do?notice_num=${vo.notice_num}">${vo.notice_num}</a></td>
-				<td class="text-left">${vo.notice_title}</td>
-				<td class="text-left">${vo.notice_content}</td>
-				<td>${vo.notice_date}</td>
-			</tr>
-		</c:forEach>
-	</tbody>
-	<tfoot>
-		<tr>
-			<td colspan="4">
-					<c:forEach var="i" begin="1"
-							end="${totalPageCount }" step="1">
-							<a href="noticeSelectAll.do?cpage=${i }${params}">${i }</a>&nbsp;
+			<table class="table mt-3" id="ntable">
+				<tbody class="table-group-divider" id="vos">
+					<c:forEach var="vo" items="${vos}">
+						<tr onClick="location.href='noticeSelectOne.do?notice_num=${vo.notice_num}'">
+							<td class="col-md-1 col-1 text-center">${vo.notice_num}</td>
+							<td class="col-md-8 col-7 text-ellipsis">${vo.notice_title}</td>
+							<!--<td class="col-6 text-ellipsis">${vo.notice_content}</td> -->
+							<td class="col-md-3 col-4 text-end"><fmt:formatDate value="${vo.notice_date}" pattern="yyyy-MM-dd"/></td>
+						</tr>
 					</c:forEach>
-			</td>
-		</tr>
-	</tfoot>
-	</table>
+				</tbody>
+			</table>
+		
+			<div class="pagenation d-flex justify-content-center">
+				<c:forEach var="i" begin="1" end="${totalPageCount}" step="1">
+					<a href="noticeSelectAll.do?cpage=${i}${params}">${i}</a>&nbsp;
+				</c:forEach>
+			</div>
+		</div>
+		<jsp:include page="../footer.jsp"></jsp:include>		
+	</div>
 </body>
 </html>
