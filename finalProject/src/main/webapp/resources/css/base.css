@@ -29,7 +29,7 @@
 }
 
 html, body {
-  height: 100%;
+	height: 100%;
 }
 
 a, a:hover {
@@ -40,7 +40,7 @@ a, a:hover {
 ul {
 	list-style: none;
 	margin: 0px;
-	padding: 0px;	
+	padding: 0px;
 }
 
 #logo {
@@ -51,7 +51,7 @@ ul {
 .form-control:focus {
 	border: 1px solid #33A1FD;
 	box-shadow: none;
-} 
+}
 
 .border-silver {
 	border: 1px solid silver;
@@ -104,21 +104,21 @@ ul {
 }
 
 .notification-btn {
-background: none;
-  border: none;
-  padding: 0;
+	background: none;
+	border: none;
+	padding: 0;
 }
 
 .notification-btn {
-  position: relative;
+	position: relative;
 }
 
 .badge {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  padding: 5px;
-  border-radius: 50%;
-  background-color: #dc3545;
-  border-radius: 50%;
+	position: absolute;
+	top: -4px;
+	right: -4px;
+	padding: 5px;
+	border-radius: 50%;
+	background-color: #dc3545;
+	border-radius: 50%;
 }

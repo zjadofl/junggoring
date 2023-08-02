@@ -11,39 +11,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 	<jsp:include page="../css.jsp"></jsp:include>
 	
-	<style>
-		/* 전체 */		
-		/* 마이페이지 breadcrumb */
-		.breadcrumb {
-			padding-top: 35px;
-			padding-bottom: 35px;
-		}
-		
-		
-		
-		
-		/* 마이페이지 서브메뉴 */
-		/*
-		.mypage-floating-menu {
-			padding-top: 15px;
-			padding-bottom: 15px;
-			border: 2px solid #33A1FD;
-		}
-		
-		.mypage-floating-menu li {
-			list-style-type: none;
-		}
-		
-		.mypage-floating-menu li a {
-			display: block;
-			text-align: center;
-			padding: 14px 16px;
-		}
-		
-		.mypage-floating-menu li a:hover{
-			color: #33A1FD;
-		}
-		*/
+	<style>		
 
 		
 		

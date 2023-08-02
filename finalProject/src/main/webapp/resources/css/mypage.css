@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.breadcrumb {
+	padding-top: 35px;
+	padding-bottom: 35px;
+}
+
+.mypage-floating-menu {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	background-color: #F7F7F7;
+}
+
+.mypage-floating-menu li a {
+	display: block;
+	text-align: center;
+	padding: 14px 16px;
+}
+
+.mypage-floating-menu li a:hover {
+	font-weight: bold;
+}

@@ -46,7 +46,7 @@ public class MemberController {
 		log.info("/memberInsertOK.do");
 		log.info("{}", vo);
 		
-		vo.setAddress(vo.getAddress() + " " + detailAddress);
+		vo.setAddress(vo.getAddress() + ", " + detailAddress);
 
 		String getOriginalFilename = vo.getMultipartFile().getOriginalFilename();
 		int fileNameLength = vo.getMultipartFile().getOriginalFilename().length();
