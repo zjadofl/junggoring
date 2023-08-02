@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.slf4j.Slf4j;
 import test.com.idle.service.MemberService;
@@ -41,9 +42,11 @@ public class MemberController {
 	}// end memberInsert
 
 	@RequestMapping(value = "/memberInsertOK.do", method = RequestMethod.POST)
-	public String memberInsertOK(MemberVO vo) throws IllegalStateException, IOException {
+	public String memberInsertOK(MemberVO vo, @RequestParam("detail-address") String detailAddress) throws IllegalStateException, IOException {
 		log.info("/memberInsertOK.do");
 		log.info("{}", vo);
+		
+		vo.setAddress(vo.getAddress() + " " + detailAddress);
 
 		String getOriginalFilename = vo.getMultipartFile().getOriginalFilename();
 		int fileNameLength = vo.getMultipartFile().getOriginalFilename().length();
@@ -144,7 +147,7 @@ public class MemberController {
 			File f = new File(realPath + "/" + vo.getMember_savename());
 			vo.getMultipartFile().transferTo(f);
 			
-			// 썸네일 사진저장
+			/// 썸네일 사진저장
 			//// create thumbnail image/////////
 			BufferedImage original_buffer_img = ImageIO.read(f);
 			BufferedImage thumb_buffer_img = new BufferedImage(50, 50, BufferedImage.TYPE_3BYTE_BGR);
@@ -177,7 +180,7 @@ public class MemberController {
 	@RequestMapping(value = "/memberDeleteOK.do", method = RequestMethod.GET)
 	public String memberDeleteOK(MemberVO vo) {
 		log.info("/memberDeleteOK.do");
-
+		
 		int result = service.delete(vo);
 		
 		if (result == 1) {

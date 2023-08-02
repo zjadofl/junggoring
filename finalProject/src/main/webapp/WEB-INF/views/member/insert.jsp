@@ -63,7 +63,7 @@
 				alert("회원가입 완료되었습니다!");
 				return true;
 			}
-			alert("ID중복검사버튼을 눌러 사용가능한 아이디인지 확인해주세요!");
+			alert("ID 중복검사버튼을 눌러 사용가능한 아이디인지 확인해주세요!");
 			return false;
 		});
 
@@ -102,6 +102,8 @@
 				}
 
 				$("#demo").html(msg);
+				$("#demo").css("color","#33A1FD");
+				
 			},
 			error : function(xhr, status, error) {
 				console.log('xhr.status:', xhr.status);
@@ -204,10 +206,10 @@
 				<div class="mt-4">
 					<div><b>주소</b></div>
 					<div class="input-group my-2">
-						<input type="text" name="postcode" placeholder="우편번호" class="form-control" required disabled>
+						<input type="text" name="postcode" placeholder="우편번호" class="form-control" required readonly>
 						<button type="button" class="btn button-main-color" onclick="findAddress()">주소 검색</button>
 					</div>
-					<input type="text" name="address" placeholder="기본 주소" class="form-control" required disabled>
+					<input type="text" name="address" placeholder="기본 주소" class="form-control" required readonly>
 					<input type="text" name="detail-address" placeholder="나머지 주소(선택 입력 가능)" class="form-control my-2">
 				</div>
 				<div class="mt-4">
@@ -217,26 +219,6 @@
 				<div class="mt-4"> 
 					<input type="submit" value="회원가입" class="btn button-main-color w-100">
 				</div>
-	<!-- 				<div>
-						<label for="address"><b>주소</b></label> <br> <select id="address" name="address" class="">
-							<option selected>서울</option>
-							<option>부산</option>
-							<option>대구</option>
-							<option>인천</option>
-							<option>광주</option>
-							<option>대전</option>
-							<option>울산</option>
-							<option>강원</option>
-							<option>경기</option>
-							<option>경남</option>
-							<option>경북</option>
-							<option>전남</option>
-							<option>전북</option>
-							<option>제주</option>
-							<option>충남</option>
-							<option>충북</option>
-						</select>
-					</div> -->
 			</form>
 		</div>
 	</div>
