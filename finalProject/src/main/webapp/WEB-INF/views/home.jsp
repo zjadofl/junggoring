@@ -22,7 +22,7 @@
 				<h4 class="fw-bold">공지사항</h4>
 			</div>
 			<div class="col-6 text-end px-0">
-				<a href="noticeSelectAll.do" class="fw-bold fs-5">더보기</a>
+				<a href="noticeSelectAll.do" class="fw-bold fs-5 ">더보기</a>
 			</div>
 			<table class="table mt-3" id="ntable">
 				<tbody class="table-group-divider" id="vos">
@@ -41,18 +41,16 @@
 			<div class="col-6 px-0">
 				<h4 class="fw-bold">최근 중고거래</h4>
 			</div>
-			<div class="col-6 text-end px-0">
-				<a href="boardSelectAll.do" class="fw-bold fs-5">더보기</a>
-			</div>
-			<c:choose>
+			<c:choose>				
 				<c:when test="${empty vos}">
-					<div class="no-list mt-3">
-						<h4>
-							<b>등록된 중고거래 게시글이 없습니다.</b>
-						</h4>
+					<div class="no-list my-5">
+						<p>등록된 중고거래 게시글이 없습니다.</p>
 					</div>
 				</c:when>
 				<c:otherwise>
+					<div class="col-6 text-end px-0">
+						<a href="boardSelectAll.do" class="fw-bold fs-5">더보기</a>
+					</div>					
 					<div class="mt-3 g-0">
 						<div class="row g-4">
 							<c:forEach var="vo" items="${vos}">
@@ -109,18 +107,16 @@
 			<div class="col-6 px-0">
 				<h4 class="fw-bold">최근 팔아요</h4>
 			</div>
-			<div class="col-6 text-end px-0">
-				<a href="boardSelectAll.do" class="fw-bold fs-5">더보기</a>
-			</div>
 			<c:choose>
-				<c:when test="${empty vos}">
-					<div class="no-list mt-3">
-						<h4>
-							<b>등록된 중고거래 게시글이 없습니다.</b>
-						</h4>
+				<c:when test="${empty sellvos}">
+					<div class="no-list my-5">
+						<p>등록된 중고거래 게시글이 없습니다.</p>
 					</div>
 				</c:when>
 				<c:otherwise>
+					<div class="col-6 text-end px-0">
+						<a href="boardSelectAll.do" class="fw-bold fs-5">더보기</a>
+					</div>					
 					<div class="mt-3 g-0">
 						<div class="row g-4">
 							<c:forEach var="vo" items="${sellvos}">
@@ -177,18 +173,16 @@
 			<div class="col-6 px-0">
 				<h4 class="fw-bold">최근 구해요</h4>
 			</div>
-			<div class="col-6 text-end px-0">
-				<a href="boardSelectAll.do" class="fw-bold fs-5">더보기</a>
-			</div>
 			<c:choose>
-				<c:when test="${empty vos}">
-					<div class="no-list mt-3">
-						<h4>
-							<b>등록된 중고거래 게시글이 없습니다.</b>
-						</h4>
+				<c:when test="${empty buyvos}">
+					<div class="no-list my-5">
+						<p>등록된 중고거래 게시글이 없습니다.</p>
 					</div>
 				</c:when>
 				<c:otherwise>
+					<div class="col-6 text-end px-0">
+						<a href="boardSelectAll.do" class="fw-bold fs-5">더보기</a>
+					</div>					
 					<div class="mt-3 g-0">
 						<div class="row g-4">
 							<c:forEach var="vo" items="${buyvos}">
