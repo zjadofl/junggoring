@@ -14,15 +14,28 @@
 <link href="resources/css/button.css" rel="stylesheet">
 <script type="text/javascript">
 	function findAddress() {
-		var width = 500; //팝업의 너비
-		var height = 600; //팝업의 높이
-		new daum.Postcode({
-		    width: width, //생성자에 크기 값을 명시적으로 지정해야 합니다.
-		    height: height
-		}).open({
-		    left: (window.screen.width / 2) - (width / 2),
-		    top: (window.screen.height / 2) - (height / 2)
-		});	
+        new daum.Postcode({
+            oncomplete: function(data) {
+                var roadAddr = data.roadAddress;
+                var extraRoadAddr = '';
+
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+				
+                $("input[name=postcode]").val(data.zonecode);
+                $("input[name=address]").val(roadAddr);
+                $("input[name=detail-address]").focus();
+            }
+        }).open();
 	}
 
 	const idRegExp = /^[a-zA-Z0-9]{4,12}$/; //아이디 
@@ -195,7 +208,7 @@
 						<button type="button" class="btn button-main-color" onclick="findAddress()">주소 검색</button>
 					</div>
 					<input type="text" name="address" placeholder="기본 주소" class="form-control" required disabled>
-					<input type="text" name="secondary-address" placeholder="나머지 주소(선택 입력 가능)" class="form-control my-2" required>
+					<input type="text" name="detail-address" placeholder="나머지 주소(선택 입력 가능)" class="form-control my-2">
 				</div>
 				<div class="mt-4">
 					<div><b>프로필 사진</b></div>
