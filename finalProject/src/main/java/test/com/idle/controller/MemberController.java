@@ -197,7 +197,7 @@ public class MemberController {
 		log.info("/login.do....{}", message);
 
 		if (message != null)
-			message = "아이디또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요";
+			message = "아이디 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.";
 		model.addAttribute("message", message);
 
 		return "member/login";

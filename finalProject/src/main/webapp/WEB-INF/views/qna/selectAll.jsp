@@ -12,23 +12,7 @@
 	<jsp:include page="../css.jsp"></jsp:include>
 	
 	<style>
-		/* 전체 */
-		a {
-			text-decoration: none;
-			color: #000;
-		}
-		
-		a:hover {
-			color: inherit;
-		}
-		
-		li {
-		  list-style-type: none;
-		}
-		
-				
-		
-		
+		/* 전체 */		
 		/* 마이페이지 breadcrumb */
 		.breadcrumb {
 			padding-top: 35px;
