@@ -35,25 +35,23 @@
 	      </div>
 	    </div>
 		
-			<table class="table mt-3" id="ntable">
-				<tbody class="table-group-divider" id="vos">
-					<c:forEach var="vo" items="${vos}">
-						<tr onClick="location.href='noticeSelectOne.do?notice_num=${vo.notice_num}'">
-							<td class="col-md-1 col-1 text-center">${vo.notice_num}</td>
-							<td class="col-md-8 col-7 text-ellipsis">${vo.notice_title}</td>
-							<!--<td class="col-6 text-ellipsis">${vo.notice_content}</td> -->
-							<td class="col-md-3 col-4 text-end"><fmt:formatDate value="${vo.notice_date}" pattern="yyyy-MM-dd"/></td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		
-			<div class="pagenation d-flex justify-content-center">
-				<c:forEach var="i" begin="1" end="${totalPageCount}" step="1">
-					<a href="noticeSelectAll.do?cpage=${i}${params}">${i}</a>&nbsp;
+		<table class="table mt-3" id="ntable">
+			<tbody class="table-group-divider" id="vos">
+				<c:forEach var="vo" items="${vos}">
+					<tr onClick="location.href='noticeSelectOne.do?notice_num=${vo.notice_num}'">
+						<td class="col-md-1 col-1 text-center">${vo.notice_num}</td>
+						<td class="col-md-8 col-7 text-ellipsis">${vo.notice_title}</td>
+						<td class="col-md-3 col-4 text-end"><fmt:formatDate value="${vo.notice_date}" pattern="yyyy-MM-dd"/></td>
+					</tr>
 				</c:forEach>
-			</div>
-
+			</tbody>
+		</table>
+	
+		<div class="pagenation d-flex justify-content-center">
+			<c:forEach var="i" begin="1" end="${totalPageCount}" step="1">
+				<a href="noticeSelectAll.do?cpage=${i}${params}">${i}</a>&nbsp;
+			</c:forEach>
+		</div>
 	</div>
 	<jsp:include page="../footer.jsp"></jsp:include>	
 </body>

@@ -1,37 +1,54 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>회원정보수정</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-	integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-	integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
-	crossorigin="anonymous"></script>
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<link href="resources/css/base.css" rel="stylesheet">
+<link href="resources/css/mypage.css" rel="stylesheet">
+<link href="resources/css/button.css" rel="stylesheet">
+<link href="resources/css/size-utilities.css" rel="stylesheet">
 
 <script type="text/javascript">
+	function findAddress() {
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	            var roadAddr = data.roadAddress;
+	            var extraRoadAddr = '';
+	
+	            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                extraRoadAddr += data.bname;
+	            }
+	
+	            if(data.buildingName !== '' && data.apartment === 'Y'){
+	               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	            }
+	
+	            if(extraRoadAddr !== ''){
+	                extraRoadAddr = ' (' + extraRoadAddr + ')';
+	            }
+				
+	            $("input[name=postcode]").val(data.zonecode);
+	            $("input[name=address]").val(roadAddr);
+	            $("input[name=detail-address]").focus();
+	        }
+	    }).open();
+	}
+	
 	const idRegExp = /^[a-zA-Z0-9]{4,12}$/; //아이디 
 	const pwRegExp = /^[a-zA-Z0-9]{4,12}$/; //비밀번호
 	const nameRegExp = /^[가-힣a-zA-Z]{2,20}$/; //이름
 	let box;
 
 	$(function() {
-// 		console.log("onload....");
+		// 		console.log("onload....");
 
 		$('#update_form').submit(function() {
 			if (!validationPw()) {
@@ -75,161 +92,93 @@
 		$("sidenav").click(function() {
 			toggleClass(".active-color");
 		});
+		
+
+		const fileInput = document.getElementById('multipartFile');
+		const previewImage = document.getElementById('preview-image');
+
+		fileInput.addEventListener('change', function(event) {
+			const file = event.target.files[0];
+			const reader = new FileReader();
+
+			reader.onload = function() {
+				previewImage.src = reader.result;
+			}
+
+			if (file) {
+				reader.readAsDataURL(file);
+			}
+		});
 
 	});//end onload
 </script>
-<style type="text/css">
-/*
-.myPageSidenav {
-	z-index: 1;
-	top: 20px;
-	left: 10px;
-	border: 3px solid #33A1FD;
-	overflow-x: hidden;
-	padding: 8px 0;
-}
-
-.myPageSidenav a {
-	padding: 6px 8px 6px 16px;
-	text-decoration: none;
-	font-size: 18px;
-	color: black;
-	display: block;
-}
-*/
-
-/* 마우스 오버(마우스 올렸을때) */
-.myPageSidenav a:hover {
-	opacity: 0.8;
-}
-
-.myPageUpdateBigContainer {
-	width: 60%;
-	margin: 0 auto;
-}
-
-.myPageUpdateForm {
-	border: 3px solid #f1f1f1;
-	width: 150%;
-}
-
-.memberUpdateItem {
-	width: 60%;
-	padding: 12px 20px;
-	margin: 8px 0;
-	display: inline-block;
-	border: 1px solid #ccc;
-	box-sizing: border-box;
-}
-
-.memberUpdateButton {
-	background-color: #33A1FD;
-	color: white;
-	padding: 14px 20px;
-	margin: 8px 0;
-	border: none;
-	cursor: pointer;
-	width: 60%;
-}
-
-.memberUpdateButton:hover {
-	opacity: 0.8;
-}
-
-.memberUpdateContainer {
-	padding: 16px;
-}
-</style>
-
 </head>
 <body>
-
 	<jsp:include page="../top_menu.jsp"></jsp:include>
-	<div class="myPageUpdateBigContainer">
-		<div class="breadcrumb fs-5 fw-bold px-4">회원정보수정</div>
+	<div class="container">
+		<div class="row mx-2 my-5">
+			<div class="col-6 px-0">
+				<h4 class="fw-bold">회원정보수정</h4>
+			</div>
+		</div>
 		<div class="row my-3">
 			<div class="col-md-3 col-lg-2">
-				<div class="myPageSidenav">
-					<ul class="mypage-floating-menu px-0">
-						<li><a href="memberSelectOne.do?id=${user_id}">마이페이지</a></li>
-						<li><a class="fw-bold" href="memberUpdate.do?id=${user_id}">회원정보수정</a></li>
-						<li><a href="qnaSelectAll.do?writer=${user_id}">내 Q&A 목록</a></li>
-					</ul>
-				</div>
+				<ul class="mypage-floating-menu px-0">
+					<li><a href="memberSelectOne.do?id=${user_id}">마이페이지</a></li>
+					<li class="fw-bolder"><a href="memberUpdate.do?id=${user_id}" class="text-main-color">회원정보수정</a></li>
+					<li><a href="qnaSelectAll.do?writer=${user_id}">내 Q&A 목록</a></li>
+				</ul>
 			</div>
 			<div class="col-md-9 col-lg-10 px-5">
-				<div class="row">
-					<h4>${user_id}님회원정보수정</h4>
-					<form action="memberUpdateOK.do" method="post"
-						enctype="multipart/form-data" id="update_form"
-						class="myPageUpdateForm">
-						<div class="memberUpdateContainer">
-							<div class="memberUpdateContainer">
-								<label for="id"><b>아이디</b></label> <br>
-								<td><span id="span_id">${vo2.id}</span></td> <input
-									type="hidden" id="id" name="id" value="${vo2.id}"
-									class="memberUpdateItem" required>
-							</div>
-
-							<div class="memberUpdateContainer">
-								<label for="pw"><b>비밀번호</b></label> <br> <input
-									type="password" id="pw" name="pw" value="${vo2.pw}"
-									placeholder="비밀번호" class="memberUpdateItem" required>
-									<p>4~12자의 영문 대소문자와 숫자로만 입력</p>
-							</div>
-							<div class="memberUpdateContainer">
-								<label for="name"><b>이름</b></label> <br> <input type="text"
-									id="name" name="name" value="${vo2.name}" placeholder="이름"
-									class="memberUpdateItem" required>
-									<p>2~20자의 영문 대소문자와 한글 입력</p>
-							</div>
-							<br>
-							<div class="memberUpdateContainer">
-								<label for="address"><b>주소</b></label> <br> <select
-									id="address" name="address" class="memberUpdateItem">
-									<option <c:if test="${vo2.address == '서울'}">selected</c:if>>서울</option>
-									<option <c:if test="${vo2.address == '부산'}">selected</c:if>>부산</option>
-									<option <c:if test="${vo2.address == '대구'}">selected</c:if>>대구</option>
-									<option <c:if test="${vo2.address == '인천'}">selected</c:if>>인천</option>
-									<option <c:if test="${vo2.address == '광주'}">selected</c:if>>광주</option>
-									<option <c:if test="${vo2.address == '대전'}">selected</c:if>>대전</option>
-									<option <c:if test="${vo2.address == '울산'}">selected</c:if>>울산</option>
-									<option <c:if test="${vo2.address == '강원'}">selected</c:if>>강원</option>
-									<option <c:if test="${vo2.address == '경기'}">selected</c:if>>경기</option>
-									<option <c:if test="${vo2.address == '경남'}">selected</c:if>>경남</option>
-									<option <c:if test="${vo2.address == '경북'}">selected</c:if>>경북</option>
-									<option <c:if test="${vo2.address == '전남'}">selected</c:if>>전남</option>
-									<option <c:if test="${vo2.address == '전북'}">selected</c:if>>전북</option>
-									<option <c:if test="${vo2.address == '제주'}">selected</c:if>>제주</option>
-									<option <c:if test="${vo2.address == '충남'}">selected</c:if>>충남</option>
-									<option <c:if test="${vo2.address == '충북'}">selected</c:if>>충북</option>
-								</select>
-							</div>
-							<br>
-							<div class="memberUpdateContainer">
-								<label for="multipartFile"><b>프로필 사진</b></label> <br> <input
-									type="file" id="multipartFile" name="multipartFile"> <input
-									type="hidden" id="member_savename" name="member_savename"
-									value="${vo2.member_savename}" class="memberUpdateItem">
-							</div>
-							<br>
-							<div class="memberUpdateContainer">
-								<input type="submit" value="회원수정완료" class="memberUpdateButton">
-							</div>
-							<hr>
-							<div class="memberUpdateContainer">
-								<h5>회원 탈퇴</h5>
-								<p>회원 탈퇴시 모든 정보가 삭제되며 되돌릴 수 없습니다.</p>
-								<p>정말 탈퇴하시겠습니까?</p>
-								<a href="memberDeleteOK.do?id=${param.id}">회원탈퇴하기</a>
-							</div>
+				<div class="fs-5 fw-bold mb-3">${user_id}님 회원정보수정</div>
+				<div class="border-silver p-5">
+					<form action="memberUpdateOK.do" method="post" enctype="multipart/form-data" id="update_form">
+						<div class="fw-bold mb-2">프로필 사진</div>
+						<div class="my-3">
+							<img class="w-lg-25 w-sm-50" src="resources/img/${vo2.member_savename}" id="preview-image">
+							<input type="file" id="multipartFile" name="multipartFile" class="form-control my-2 w-lg-50">
+							<input type="hidden" id="member_savename" name="member_savename" value="${vo2.member_savename}">
+						</div>
+						<hr>
+						<div class="my-3">
+							<span class="fw-bold me-3">아이디</span>
+							<span id="span_id" >${vo2.id}</span>
+							<input type="hidden" id="id" name="id" value="${vo2.id}" required>
+						</div>
+						<hr>
+						<div class="my-3">
+							<span class="fw-bold my-4">비밀번호</span>
+							<input type="password" id="pw" name="pw" value="${vo2.pw}" placeholder="비밀번호" class="form-control w-lg-50 my-2" required>
+							<p class="mb-2">4~12자의 영문 대소문자와 숫자로만 입력</p>	
+						</div>
+						<hr>
+						<div>
+							<span class="fw-bold my-3">이름</span>
+							<input type="text" id="name" name="name" value="${vo2.name}" placeholder="이름" class="form-control w-lg-50 my-2" required>
+							<p class="mb-2">2~20자의 영문 대소문자와 한글 입력</p>
+						</div>
+						<hr>
+						<div>
+							<span class="fw-bold my-3 me-3">주소</span>
+							<c:set var="addressArray" value="${fn:split(vo2.address, ',')}" />
+							<button type="button" class="btn button-main-color my-2" onclick="findAddress()">주소 검색</button>
+							<input type="text" name="address" placeholder="기본 주소" class="form-control w-lg-50" value="${addressArray[0]}" required readonly>
+							<input type="text" name="detail-address" placeholder="나머지 주소(선택 입력 가능)" class="form-control my-2 w-lg-50" value="${fn:trim(addressArray[1])}">										
+						</div>
+						<div class="text-center my-4">
+							<input type="submit" value="회원수정완료" class="btn button-main-color">
+						</div>
+						<div class="mt-3">
+							<h5 class="fw-bold my-3">회원 탈퇴</h5>
+							<p>회원 탈퇴시 모든 정보가 삭제되며 되돌릴 수 없습니다.</p>
+							<p>정말 탈퇴하시겠습니까?</p>
+							<a href="memberDeleteOK.do?id=${param.id}" class="text-main-color fw-bold">회원탈퇴하기</a>
 						</div>
 					</form>
-
 				</div>
 			</div>
 		</div>
 	</div>
-
+	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>
