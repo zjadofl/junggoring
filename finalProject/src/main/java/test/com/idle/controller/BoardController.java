@@ -45,6 +45,7 @@ public class BoardController {
 			@RequestParam(value = "sortType", required = false) String sortType,
 			@RequestParam(value = "board_type", required = false) Integer board_type,
 			@RequestParam(value = "deal_region", required = false) String deal_region) {
+		
 		log.info("/boardSelectAll.do,{},{}", category, deal_region);
 		log.info("/boardSelectAll.do,{},{}", sortType, board_type);
 
@@ -138,9 +139,13 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/boardInsertOK.do", method = RequestMethod.POST)
-	public String insertOK(BoardVO vo) throws IllegalStateException, IOException {
+	public String insertOK(BoardVO vo,
+			@RequestParam(value = "detail-address", required = false) String detailAddress) throws IllegalStateException, IOException {
 		log.info("/insertOK.do...{}", vo);
-
+		
+		String deal_region = vo.getAddress() + ", "+ detailAddress;
+		vo.setDeal_region(deal_region);
+		
 		List<String> list = new ArrayList<String>(
 				Arrays.asList("board_default.png", "board_default.png", "board_default.png"));
 
