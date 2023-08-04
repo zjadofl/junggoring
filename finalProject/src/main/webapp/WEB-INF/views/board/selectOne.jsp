@@ -1,93 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page import="test.com.idle.vo.BoardVO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>상세페이지</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-  	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<jsp:include page="../css.jsp"></jsp:include>
-<style type="text/css">
-#reportModal{
-	width: 30%;
-	margin: 0 auto;
-	border: 1px solid #33A1FD;
-	background: white;
-	position: fixed;
-  	left: 50%;
-  	top: 50%;
-	transform: translate(-50%, -50%);
-   	padding: 30px;
-   	border-radius: 20px;
-}
-
-#reportModal h2{
-	color: #33A1FD;
-	margin-bottom: 15px;
-}
-
-#reportWarning{
-	color : red;
-}
-
-.close {
-	float: right;
-	background: none;
-	border: none;
-	font-size: x-large;
-}
-
-.close:hover{
-	font-weight: bold;
-}
-
-.modalBtn{
-	text-align: center;
-}
-
-.modalContent input[type="radio"] {
-    display: none;
- }
-
-.modalContent input[type="radio"]:checked + label {
-    font-weight: bold;
-}
-
-.modalContent label {
-    cursor: pointer;
-}
-
-.modalContent label:hover{
-	font-weight: bold;
-	color: #33A1FD;
-}
-
-.reportBoard{
-	height: auto;
-	margin-bottom: 15px;
-}
-.reportBoard label{
-	margin-bottom: 18px;
-}
-
-.reportBoard textarea{
-	display: none;
-	width: 90%;
-}
-
-.modalBtn button{
-	background-color: #33A1FD;
-	border: none;
-	color: white;
-	border-radius: 5px;
-	padding: 8px;
-}
-</style>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<link href="resources/css/base.css" rel="stylesheet">
+<link href="resources/css/board.css" rel="stylesheet">
+<link href="resources/css/button.css" rel="stylesheet">
 <script type="text/javascript">
 	
 	$(function(){
@@ -99,7 +24,7 @@
 			method:'GET',
 			dataType:'json',
 			success: function(vo2){
-// 				console.log('test ajax success:',vo2);
+ 				console.log('test ajax success:',vo2);
 				
 				let board_type = ``;
 				if(vo2.board_type==1){
@@ -191,7 +116,7 @@
 				
 				//수정 팀원 기능
 				$(document).on('click', '#reportBtn', function() {
-	                $('#reportModal').show();
+	                $('#report-modal').show();
 	            });
 
 	            $(document).on //수정 팀원 기능end
@@ -342,157 +267,93 @@
 		}
 	
 </script>
-<style type="text/css">
-#reportModal{
-	width: 30%;
-	margin: 0 auto;
-	border: 1px solid black;
-	background: white;
-	position: fixed;
-  	left: 50%;
-  	top: 50%;
-	transform: translate(-50%, -50%);
-   	padding: 30px;
-   	border-radius: 20px;
-}
-
-#reportWarning{
-	color : red;
-}
-
-.close {
-	float: right;
-}
-
-.modalBtn{
-	text-align: center;
-}
-
-.modalContent input[type="radio"] {
-    display: none;
- }
-
-.modalContent input[type="radio"]:checked + label {
-    font-weight: bold;
-}
-
-.modalContent label {
-    cursor: pointer;
-}
-
-.modalContent label:hover{
-	font-weight: bold;
-}
-
-.reportBoard{
-	height: auto;
-	margin-bottom: 15px;
-}
-.reportBoard label{
-	margin-bottom: 18px;
-}
-
-.reportBoard textarea{
-	display: none;
-	width: 90%;
-}
-</style>
 </head>
 <body>
- <section style="padding-left: 100px; padding-right: 100px;">
 	<jsp:include page="../top_menu.jsp"></jsp:include>
-	<h1 id="board_type" ></h1>
-	<div class="card mb-3" style="max-width: 100%; ">
-		<div class="row g-2">
-			<div class="col-md-4">
-				<div id="carouselExampleControls" class="carousel slide"
-					data-bs-ride="carousel">
-					<div class="carousel-inner">
-						<div class="carousel-item active" id="img1">
-							
+	<div class="container">
+		<div class="row mx-2 my-5">
+			<div class="col px-0">
+				<h4 class="fw-bold">팔아요</h4>
+			</div>
+		</div>
+		
+		<div class="card mb-3">
+			<div class="row g-2">
+				<div class="col-md-4">
+					<div id="carousel-controls" class="carousel slide" data-bs-ride="carousel">
+						<div class="carousel-inner">
+							<div class="carousel-item active" id="img1"></div>
+							<div class="carousel-item" id="img2"></div>
+							<div class="carousel-item" id="img3"></div>
 						</div>
-
-						<div class="carousel-item" id="img2">
-							
-						</div>
-						<div class="carousel-item" id="img3">
-							
-						</div>
+						<button class="carousel-control-prev" type="button" data-bs-target="#carousel-controls" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button" data-bs-target="#carousel-controls" data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
+						</button>
 					</div>
-					<button class="carousel-control-prev" type="button"
-						data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Previous</span>
-					</button>
-					<button class="carousel-control-next" type="button"
-						data-bs-target="#carouselExampleControls" data-bs-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Next</span>
-					</button>
 				</div>
-			</div>
-			<div class="col-md-8">
-				<div class="card-body">
-					<h4 class="card-title" id="board_title"></h4>
-					<p class="card-text" id="board_date"></p>
-					<p class="card-text" id="price"></p>
-					<p class="card-text" id="category"></p>
-					<p class="card-text" id="deal_region"></p>
-					<p class="card-text" id="count"></p>
-					<p class="card-text" id="udbutton"></p>
-					<p class="card-text" id="board_status"></p>
-					<p class="card-text" id="buttons" align="right"></p>
+				<div class="col-md-8">
+					<div class="card-body">
+						<h4 class="card-title" id="board_title"></h4>
+						<p class="card-text" id="board_date"></p>
+						<p class="card-text" id="price"></p>
+						<p class="card-text" id="category"></p>
+						<p class="card-text" id="deal_region"></p>
+						<p class="card-text" id="count"></p>
+						<p class="card-text" id="udbutton"></p>
+						<p class="card-text" id="board_status"></p>
+						<p class="card-text" id="buttons" align="right"></p>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="card mb-3" style="max-width: 200px;">
-		<div class="row g-0">
-			<div class="col-md-4" id="m_img"></div>
-			<div class="col-md-8">
-				<div class="card-body">
-					<p class="card-text" id="m_name"></p>
-					<p class="card-text" id="m_address"></p>
+		
+		<div class="card mb-3" style="max-width: 200px;">
+			<div class="row g-0">
+				<div class="col-md-4" id="m_img"></div>
+				<div class="col-md-8">
+					<div class="card-body">
+						<p class="card-text" id="m_name"></p>
+						<p class="card-text" id="m_address"></p>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<hr>
+		<hr>
 		<div class="form-floating">
 			<textarea class="form-control" id="board_content" style="height: 400px" readonly></textarea>
 		</div>
-	</section>
-<!-- 수정 팀원 기능: 신고하기 -->
-<div id="reportModal"  style="display: none;">
-	<button class="close"><span>X</span></button>
-	<h2>신고하기</h2>
-	<p>아래 신고 사유를 선택해주세요</p>
-	<hr>
-	<div class="modalContent">
-		<form action="blackInsertOK.do" method="get" onsubmit="return blackInsertForm()" id="blackInsert">
-			<div class="reportBoard">
-				<input type="hidden" name="targetid" value="${vo2.writer}"/>
-				<input type="hidden" name="reporterid" value="${user_id}"/>
-				<input type="hidden" name="board_num" value="${vo2.board_num}"/>
-				<input type="hidden" name="black_type" value=""/>
-				<input type="radio" name="black_category" id="black_category1" value="1"/><label for="black_category1">광고성 게시글이에요</label><br />
-				<input type="radio" name="black_category" id="black_category2" value="2"/><label for="black_category2">거래금지품목(술,약류,담배 등)을 팔아요</label><br />
-				<input type="radio" name="black_category" id="black_category3" value="3"/><label for="black_category3">상품정보가 부정확해요</label><br />
-				<input type="radio" name="black_category" id="black_category4" value="4"/><label for="black_category4">사기인 것 같아요</label><br />
-				<input type="radio" name="black_category" id="black_category5" value="5"/><label for="black_category5">기타 사유 입력</label><br />
-				<textarea rows="3" cols="40" name="comments" id="comments1" placeholder="게시글 신고 내용을 작성해주세요."></textarea>	
-				<input type="radio" name="black_category" id="black_category6" value="6"/><label for="black_category6">'${vo2.name}'님을 신고할래요</label><br />	
-				<textarea rows="3" cols="40" name="comments" id="comments2" placeholder="사용자 신고 내용을 작성해주세요."></textarea>	
-			</div>
-			<hr />
-			<div class="modalBtn">
-			<button type="submit">신고등록</button>
-			</div>
-		</form>
 	</div>
-</div>
+	
+	<!-- 수정 팀원 기능: 신고하기 -->
+	<div id="report-modal" style="display: none;">
+		<button class="close">
+			<span>X</span>
+		</button>
+		<h2>신고하기</h2>
+		<p>아래 신고 사유를 선택해주세요</p>
+		<hr>
+		<div class="modal-content">
+			<form action="blackInsertOK.do" method="get" onsubmit="return blackInsertForm()" id="blackInsert">
+				<div class="report-board">
+					<input type="hidden" name="targetid" value="${vo2.writer}" /> <input type="hidden" name="reporterid" value="${user_id}" /> <input type="hidden" name="board_num" value="${vo2.board_num}" /> <input type="hidden" name="black_type" value="" /> <input type="radio" name="black_category" id="black_category1" value="1" /><label for="black_category1">광고성 게시글이에요</label><br /> <input type="radio" name="black_category" id="black_category2" value="2" /><label for="black_category2">거래금지품목(술,약류,담배 등)을 팔아요</label><br /> <input type="radio" name="black_category" id="black_category3" value="3" /><label for="black_category3">상품정보가 부정확해요</label><br /> <input type="radio" name="black_category" id="black_category4" value="4" /><label for="black_category4">사기인 것 같아요</label><br /> <input type="radio" name="black_category" id="black_category5" value="5" /><label for="black_category5">기타 사유 입력</label><br />
+					<textarea rows="3" cols="40" name="comments" id="comments1" placeholder="게시글 신고 내용을 작성해주세요."></textarea>
+					<input type="radio" name="black_category" id="black_category6" value="6" /><label for="black_category6">'${vo2.name}'님을 신고할래요</label><br />
+					<textarea rows="3" cols="40" name="comments" id="comments2" placeholder="사용자 신고 내용을 작성해주세요."></textarea>
+				</div>
+				<hr />
+				<div class="model-btn">
+					<button type="submit">신고등록</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<jsp:include page="../footer.jsp"></jsp:include>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 //신고모달창 show&hide
 //신고모달창 show&hide
 $(document).ready(function() {
@@ -522,7 +383,7 @@ $(document).ready(function() {
 //신고모달창 show&hide
 $(function(){
    $('.close').click(function() {
-      $('#reportModal').hide();
+      $('#report-modal').hide();
    });
 });
 

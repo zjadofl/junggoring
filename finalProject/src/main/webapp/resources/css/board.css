@@ -1,3 +1,79 @@
+#report-modal {
+	width: 30%;
+	margin: 0 auto;
+	border: 1px solid #33A1FD;
+	background: white;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	padding: 30px;
+	border-radius: 20px;
+}
+
+#report-modal h2 {
+	color: #33A1FD;
+	margin-bottom: 15px;
+}
+
+#report-warning {
+	color: red;
+}
+
+.close {
+	float: right;
+	background: none;
+	border: none;
+	font-size: x-large;
+}
+
+.close:hover {
+	font-weight: bold;
+}
+
+.model-btn {
+	text-align: center;
+}
+
+.model-btn button {
+	background-color: #33A1FD;
+	border: none;
+	color: white;
+	border-radius: 5px;
+	padding: 8px;
+}
+
+.modal-content input[type="radio"] {
+	display: none;
+}
+
+.modal-content input[type="radio"]:checked+label {
+	font-weight: bold;
+}
+
+.modal-content label {
+	cursor: pointer;
+}
+
+.modal-content label:hover {
+	font-weight: bold;
+	color: #33A1FD;
+}
+
+.report-board {
+	height: auto;
+	margin-bottom: 15px;
+}
+
+.report-board label {
+	margin-bottom: 18px;
+}
+
+.report-board textarea {
+	display: none;
+	width: 90%;
+}
+
 .str-limit {
 	white-space: nowrap;
 	overflow: hidden;

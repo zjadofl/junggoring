@@ -25,9 +25,11 @@
 	text-decoration:none;
 	margin: 5px 10px;
 }
+
 .myButton:hover {
 	background: #33A1FD;
 }
+
 .myButton:active {
 	position:relative;
 	top:1px;
