@@ -34,7 +34,7 @@
 - **IDE** : STS 3.9
 - **Framework** : SpringFramework(5.x)
 - **Database** : Oracle DB(11xe)
-- **ORM** : Mybatis
+- Mybatis
 
 ---
 
